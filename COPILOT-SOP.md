@@ -33,7 +33,7 @@ When a chat finishes, or has to stop, its last lines are a handoff: a line start
 Next: open a new chat, select your strong model, and paste this.
 
 ```text
-REVIEW: docs/plans/PLAN-003-add-login-rate-limit.md
+REVIEW: docs/plans/0003-add-login-rate-limit.md
 ```
 ````
 
@@ -72,7 +72,7 @@ The plan file carries the detail between chats. The Builder records progress and
    ```
 
 4. Answer any clarifying questions.
-5. Copilot saves `docs/plans/PLAN-<NNN>-<slug>.md` with `Status: DRAFT`, where `<NNN>` is the next sequence number. If it only prints the plan, save it to that path yourself.
+5. Copilot saves `docs/plans/<NNNN>-<slug>.md` with `Status: DRAFT`, where `<NNNN>` is the next sequence number. If it only prints the plan, save it to that path yourself.
 
 ### Phase 2: Approve
 6. Read the plan. Ask for changes in the same chat until you are happy.
@@ -135,9 +135,9 @@ It also checks that the plan is ready for the step you asked for:
 
 ## Plan numbering
 
-Plan files are named `PLAN-<NNN>-<slug>.md`, for example `PLAN-003-add-login-rate-limit.md`. The number is the order the plans were created in, so the folder lists them in sequence.
+Plan files are named `<NNNN>-<slug>.md`, for example `0003-add-login-rate-limit.md`. The number is the order the plans were created in, so the folder lists them in sequence.
 
-- The Planner assigns the number: the highest one already in `docs/plans/` plus 1, starting at `001`.
+- The Planner assigns the number: the highest one already in `docs/plans/` plus 1, starting at `0001`.
 - Numbers are never reused, and existing files are never renumbered or renamed. Deleting old plans leaves a gap, which is fine.
 - Follow-on work on a finished plan gets a new file with the next number.
 - If two people create plans on different branches at the same time, both can get the same number. Rename the later one before merging.

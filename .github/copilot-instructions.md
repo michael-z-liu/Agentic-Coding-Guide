@@ -23,8 +23,8 @@ Rules:
 
 ## 2. Shared rules (all roles)
 
-- Plans live in `docs/plans/` as `PLAN-<NNN>-<short-slug>.md`, for example `PLAN-003-add-login-rate-limit.md`. The plan file is the only handoff between chats. Never rely on another chat's memory. Anything the next chat needs must be written into the plan file.
-- `<NNN>` is a three-digit sequence number that shows the order plans were created in. Only the Planner assigns it: list `docs/plans/`, take the highest number already used and add 1, starting at `001`. Never reuse a number, and never renumber or rename an existing plan file, even if earlier plans were deleted. If a plan file has no number, leave its name as it is.
+- Plans live in `docs/plans/` as `<NNNN>-<short-slug>.md`, for example `0003-add-login-rate-limit.md`. The plan file is the only handoff between chats. Never rely on another chat's memory. Anything the next chat needs must be written into the plan file.
+- `<NNNN>` is a four-digit sequence number that shows the order plans were created in. Only the Planner assigns it: list `docs/plans/`, take the highest number already used and add 1, starting at `0001`. Never reuse a number, and never renumber or rename an existing plan file, even if earlier plans were deleted. If a plan file has no number, leave its name as it is.
 - Never invent file paths, function names, commands or library APIs. Check the codebase. If you cannot verify something, say so.
 - Follow the existing code style, structure and dependencies. Do not add a dependency unless the plan names it.
 - Never touch secrets, credentials, CI/CD configuration or anything outside the repository unless the user explicitly asks.
@@ -66,7 +66,7 @@ Example of a correct handoff:
 Next: open a new chat, select your strong model, and paste this.
 
 ```text
-REVIEW: docs/plans/PLAN-003-add-login-rate-limit.md
+REVIEW: docs/plans/0003-add-login-rate-limit.md
 ```
 ````
 
@@ -113,7 +113,7 @@ That is a REVIEWER task and this chat is PLANNER, so I have not done it.
 Next: open a new chat, select your strong model, and paste this.
 
 ```text
-REVIEW: docs/plans/PLAN-003-add-login-rate-limit.md
+REVIEW: docs/plans/0003-add-login-rate-limit.md
 ```
 ````
 
@@ -140,7 +140,7 @@ Purpose: think hard once, so the build can be done cheaply and without judgement
 You must:
 1. Read the relevant code before planning. List the files you inspected.
 2. Ask up to 5 clarifying questions if the requirement is ambiguous, then wait. Do not guess at requirements.
-3. Produce the plan in the template below and save it to `docs/plans/PLAN-<NNN>-<short-slug>.md`, numbered as in section 2, with `Status: DRAFT`. If you cannot write files, output the whole plan in a single Markdown code block and tell the user the file name to save it under.
+3. Produce the plan in the template below and save it to `docs/plans/<NNNN>-<short-slug>.md`, numbered as in section 2, with `Status: DRAFT`. If you cannot write files, output the whole plan in a single Markdown code block and tell the user the file name to save it under.
 4. Tell the user where the plan is saved and ask them to approve it or say what to change.
 5. When the user approves, set `Status: APPROVED` and end with the `BUILD:` handoff from section 3.
 
@@ -159,7 +159,7 @@ Plan quality bar: a less capable model that has never seen this conversation mus
 ### Plan template
 
 ```markdown
-# PLAN <NNN>: <title>
+# PLAN <NNNN>: <title>
 Status: DRAFT
 Created: <date>
 
