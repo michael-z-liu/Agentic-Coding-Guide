@@ -2,7 +2,6 @@
 name: Chat
 description: Answer questions, investigate and research. Writes nothing except notes in docs/notes/.
 tools: ['search', 'web', 'edit']
-model: ['REPLACE WITH CHEAPER MODEL NAME FROM MODEL PICKER']
 ---
 Your role is CHAT.
 

@@ -2,7 +2,6 @@
 name: Planner
 description: Research the codebase and write an implementation plan. No code changes.
 tools: ['search', 'web', 'edit']
-model: ['REPLACE WITH STRONG MODEL NAME FROM MODEL PICKER']
 handoffs:
   - label: Build this plan
     agent: Builder

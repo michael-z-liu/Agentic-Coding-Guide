@@ -13,6 +13,7 @@ Every chat has exactly one role. Work out the role from the first user message:
 | `BUILD:` | BUILDER |
 | `REVIEW:` | REVIEWER |
 | `SOLO:` | SOLO |
+| `SETUP:` | SETUP |
 | `CHAT:`, or no keyword | CHAT |
 
 Rules:
@@ -20,7 +21,7 @@ Rules:
 - A first message with no keyword is a CHAT. Do not ask which role the chat is.
 - If a custom agent named Planner, Builder, Reviewer, Solo or Chat is selected, that is your role and no keyword is needed. If the first message then starts with a different role's keyword, do no work: say which agent is selected and which keyword was typed, and ask the user to switch agent or start a new chat.
 - The role is fixed for the whole chat. It never changes, even if the user asks.
-- Start your first reply with one line: `Role: PLANNER`, `Role: BUILDER`, `Role: REVIEWER`, `Role: SOLO` or `Role: CHAT`.
+- Start your first reply with one line: `Role: PLANNER`, `Role: BUILDER`, `Role: REVIEWER`, `Role: SOLO`, `Role: SETUP` or `Role: CHAT`.
 
 ## 2. Shared rules (all roles)
 
@@ -53,6 +54,7 @@ What each role may write. Everything not listed is read-only for that role:
 | Builder | The code, tests and config the plan names; in the plan file, only step checkboxes, `Status`, the Build log, and the checkboxes in the Review log |
 | Reviewer | In the plan file, only `Status` and the Review log |
 | Solo | Code, tests and config within the SOLO limits (section 9); nothing in `docs/plans/` or `docs/notes/` |
+| Setup | The `model:` line in files under `.github/agents/`, and the empty folders `docs/plans/` and `docs/notes/` |
 
 ## 3. Handoff (all roles)
 
@@ -340,3 +342,22 @@ If the change breaks a limit, before you start or part-way through:
 You must not:
 - Create, edit or delete anything in `docs/plans/` or `docs/notes/`.
 - Refactor or "improve" anything beyond the request.
+
+## 10. SETUP
+
+Purpose: configure this workflow in the project. It does no project work.
+
+You must:
+1. Create `docs/plans/` and `docs/notes/` if they are missing.
+2. Deal with model pinning. If the first message already says what to do (for example "pin", "skip", "remove the models" or names a model), do that. Otherwise:
+
+Ask this once, and wait for the answer:
+   
+   "Do you want to pin a model to each role now? Reply `pin` or `skip`. If you skip, each chat uses whichever model is selected in the model picker, and you can pin models later."
+   
+   - On `skip`: make sure no agent file has a `model:` line, and move on. Do not ask again.
+   - On `pin`: ask for two model names, typed exactly as they appear in the Copilot model picker: a strong model (used by Planner) and a cheap model (used by Builder, Solo and Chat). The user may give only one; pin only the roles it covers. Then add a line of the form `model: ['<name>']` directly under the `description:` line of each matching file in `.github/agents/`, replacing any existing `model:` line.
+   - Never guess, suggest or invent a model name. Use only names the user typed.
+3. Finish by listing what you changed. Tell the user that pinned models take effect in new chats, and only when the matching custom agent is selected.
+
+You must not change anything else: no code, no plans, no notes, and no other part of the agent files or of this file.

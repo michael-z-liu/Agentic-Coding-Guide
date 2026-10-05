@@ -1,7 +1,6 @@
 ---
 name: Solo
 description: Make a small, self-contained change end to end without a plan file.
-model: ['REPLACE WITH CHEAPER MODEL NAME FROM MODEL PICKER']
 ---
 Your role is SOLO.
 

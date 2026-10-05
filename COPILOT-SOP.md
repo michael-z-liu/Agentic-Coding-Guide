@@ -17,23 +17,62 @@
 
 The colon is required. "Plan the migration for me" with no colon is treated as a Chat.
 
-Copilot does not switch models by itself from the instruction file alone. Either you pick the model in the model picker (Method A), or you let custom agents pin it for you (Method B).
+Copilot does not switch models by itself from the instruction file alone. By default you pick the model in the model picker when you start each chat, and the `Next:` line of every handoff tells you which kind to pick. Pinning models to the custom agents is optional (see setup).
 
 ## One-time setup (about 5 minutes)
 
-1. In the repository root, create the folder `.github` if it does not exist.
-2. Copy `copilot-instructions.md` to `.github/copilot-instructions.md`.
-3. Create the folders `docs/plans/` and `docs/notes/`.
-4. Optional but recommended: create `.github/agents/` and copy the four agent files (`planner`, `builder`, `chat`, `solo`) into it.
-5. Open each agent file and replace the `model:` placeholder with the model name exactly as it appears in your Copilot model picker.
-   - Planner: your strongest reasoning model.
-   - Builder, Chat and Solo: a cheaper or included (low multiplier) model.
-6. Commit the files so your team gets the same behaviour.
-7. Test: open a new chat and paste the line below. The reply must start with `Role: PLANNER`. If it does not, see Troubleshooting.
+### Option 1: let an agent do it
+
+1. Open the project in VS Code and open a new Copilot chat in Agent mode.
+2. Paste this:
+
+   ```text
+   Follow the setup steps in https://github.com/michael-z-liu/Agentic-Coding-Guide/blob/main/SETUP.md
+   ```
+
+3. The agent copies the files, creates `docs/plans/` and `docs/notes/`, and asks before replacing anything that already exists.
+4. It asks one question: whether to pin a model to each role now. Reply with one of these.
+
+   ```text
+   skip
+   ```
+
+   ```text
+   pin
+   ```
+
+   - `skip`: nothing is pinned. Each chat uses whichever model is selected in the model picker, so you choose it when you start the chat.
+   - `pin`: it asks for a strong model name and a cheap model name, exactly as shown in the model picker, and writes them into the agent files.
+5. Review the files it created and commit them so your team gets the same behaviour.
+6. Test: open a new chat and paste the line below. The reply must start with `Role: PLANNER`. If it does not, see Troubleshooting.
 
    ```text
    PLAN: say which role you are
    ```
+
+### Option 2: by hand
+
+1. Copy `.github/copilot-instructions.md` and the `.github/agents/` folder into the same paths in your project.
+2. Create the folders `docs/plans/` and `docs/notes/`.
+3. Optional: to pin a model to a role, add a line like the one below under `description:` in that role's agent file, using the model name exactly as it appears in the model picker. Leave it out to choose the model yourself each time.
+
+   ```text
+   model: ['Model Name From Picker']
+   ```
+
+4. Commit, then run the test from Option 1.
+
+### Changing models later
+
+Start a new chat with one of these. Pinned models take effect in new chats, and only when the matching custom agent is selected.
+
+```text
+SETUP: pin models
+```
+
+```text
+SETUP: remove the pinned models
+```
 
 ## How handoff works
 
@@ -156,9 +195,9 @@ You can tell it to continue solo anyway, in that same chat. Use that sparingly: 
 ### Phase 5: Close
 15. Review the diff yourself, run the tests, commit.
 
-## Using custom agents (Method B, model is pinned automatically)
+## Using custom agents (Method B)
 
-1. Open a new chat and select **Planner** in the agent dropdown. The strong model is selected for you.
+1. Open a new chat and select **Planner** in the agent dropdown. If you pinned models during setup, the strong model is selected for you; otherwise pick it in the model picker.
 2. Describe the task. No `PLAN:` keyword is needed.
 3. Review the plan and reply `approve`.
 4. Open a new chat, select **Builder**, and paste the `BUILD:` command the Planner printed. (The **Build this plan** button also works, but it carries the planning conversation into the build, which costs more.)
@@ -242,5 +281,6 @@ Plan files are named `<NNNN>-<slug>.md`, for example `0003-add-login-rate-limit.
 | Planner starts editing code | Say "You are PLANNER, revert and stop." The Planner agent's instructions restrict writes to `docs/plans/`. |
 | Planner cannot save the plan or set the status | You are in Ask mode. Switch to Agent mode, or make the change by hand. |
 | Agents do not appear in the dropdown | Files must be in `.github/agents/` and end in `.agent.md`. Your organisation may also have custom agents disabled. |
+| An agent uses the wrong model | If models are not pinned, it uses whatever the model picker shows; pick the right one. To pin, start a chat with `SETUP: pin models`. |
 | Agent ignores the `model:` line | The name must match the model picker exactly. If it still fails, pick the model by hand. |
 | Builder drifts from the plan | Stop it and start a new chat with the same `BUILD:` command. It resumes from the first unticked step. |

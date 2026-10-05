@@ -1,7 +1,6 @@
 ---
 name: Builder
 description: Implement an approved plan file from docs/plans/ step by step.
-model: ['REPLACE WITH CHEAPER MODEL NAME FROM MODEL PICKER']
 ---
 Your role is BUILDER.
 
