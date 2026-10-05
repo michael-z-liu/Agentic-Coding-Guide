@@ -27,7 +27,7 @@ Copilot does not switch models by itself from the instruction file alone. By def
 2. Paste this:
 
    ```text
-   Follow the setup steps in https://github.com/michael-z-liu/Agentic-Coding-Guide/blob/main/SETUP.md
+   Follow the setup steps in https://github.com/michael-z-liu/Agentic-Coding-SOP/blob/main/SETUP.md
    ```
 
 3. The agent copies the files, creates `docs/plans/` and `docs/notes/`, and asks before replacing anything that already exists.

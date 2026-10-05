@@ -2,13 +2,13 @@
 
 These instructions are for a GitHub Copilot agent installing this workflow into a project. A person can follow them by hand as well.
 
-Source repository: https://github.com/michael-z-liu/Agentic-Coding-Guide
+Source repository: https://github.com/michael-z-liu/Agentic-Coding-SOP
 
 ## Steps
 
 1. Confirm the workspace is the root of the project the workflow is going into. If you cannot tell, ask.
 
-2. Get these files from the source repository. Raw files are at `https://raw.githubusercontent.com/michael-z-liu/Agentic-Coding-Guide/main/<path>`. If you cannot fetch them, stop and ask the user to download the repository and tell you where it is.
+2. Get these files from the source repository. Raw files are at `https://raw.githubusercontent.com/michael-z-liu/Agentic-Coding-SOP/main/<path>`. If you cannot fetch them, stop and ask the user to download the repository and tell you where it is.
 
    | Source path | Save in the project as |
    |---|---|

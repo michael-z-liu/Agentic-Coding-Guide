@@ -12,5 +12,5 @@ Role instructions that give each GitHub Copilot chat in VS Code one job. For lar
 To use it in your own project, open a Copilot chat in Agent mode there and paste:
 
 ```text
-Follow the setup steps in https://github.com/michael-z-liu/Agentic-Coding-Guide/blob/main/SETUP.md
+Follow the setup steps in https://github.com/michael-z-liu/Agentic-Coding-SOP/blob/main/SETUP.md
 ```
