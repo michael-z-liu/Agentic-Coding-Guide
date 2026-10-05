@@ -27,10 +27,10 @@ Source repository: https://github.com/michael-z-liu/Agentic-Coding-Guide
 
 6. Model pinning. The agent files come with no `model:` line, which means each chat uses whichever model is selected in the model picker.
 
-Ask this once, and wait for the answer:
-   
+   Ask this once, and wait for the answer:
+
    "Do you want to pin a model to each role now? Reply `pin` or `skip`. If you skip, each chat uses whichever model is selected in the model picker, and you can pin models later."
-   
+
    - On `skip`: make sure no agent file has a `model:` line, and move on. Do not ask again.
    - On `pin`: ask for two model names, typed exactly as they appear in the Copilot model picker: a strong model (used by Planner) and a cheap model (used by Builder, Solo and Chat). The user may give only one; pin only the roles it covers. Then add a line of the form `model: ['<name>']` directly under the `description:` line of each matching file in `.github/agents/`, replacing any existing `model:` line.
    - Never guess, suggest or invent a model name. Use only names the user typed.
