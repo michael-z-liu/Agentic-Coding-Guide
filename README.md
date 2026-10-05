@@ -1,4 +1,4 @@
-# Agentic coding: Plan / Build workflow for GitHub Copilot
+# Agentic coding: Plan / Build / Review workflow for GitHub Copilot
 
 Role instructions that make each GitHub Copilot chat in VS Code act as a Planner, Builder or Reviewer, so a strong model writes the plan and a cheaper model implements it.
 
